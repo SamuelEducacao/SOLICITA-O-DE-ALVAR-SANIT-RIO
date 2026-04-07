@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Licenciamento Sanitário</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+/* FORM */
+.formulario {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+input {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1e3a5f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* DOCUMENTO */
+.documento {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    margin: auto;
+    padding: 20mm;
+    border: 1px solid #000;
+    position: relative;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    height: 60px;
+}
+
+/* TITULO */
+.titulo {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* LINHAS */
+.linha {
+    display: inline-block;
+    border-bottom: 1px solid #000;
+    min-width: 200px;
+}
+
+.linha-longa {
+    display: inline-block;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+
+p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ASSINATURA */
+.assinatura {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* PRINT */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .formulario {
+        display: none;
+    }
+
+    .documento {
+        border: none;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="formulario">
+    <h3>Preencher Dados</h3>
+
+    <input id="nome" placeholder="Nome">
+    <input id="rg" placeholder="RG">
+    <input id="orgao" placeholder="Órgão Expedidor">
+    <input id="dataexp" placeholder="Data Expedição">
+    <input id="cpf" placeholder="CPF">
+    <input id="endereco" placeholder="Endereço">
+    <input id="municipio" placeholder="Município/UF">
+    <input id="telefone" placeholder="Telefone">
+    <input id="email" placeholder="Email">
+
+    <input id="razao" placeholder="Razão Social">
+    <input id="fantasia" placeholder="Nome Fantasia">
+    <input id="datafunc" placeholder="Data Início Funcionamento">
+    <input id="cnpj" placeholder="CNPJ">
+    <input id="ie" placeholder="Inscrição Estadual">
+    <input id="im" placeholder="Inscrição Municipal">
+    <input id="endempresa" placeholder="Endereço Empresa">
+    <input id="munempresa" placeholder="Município Empresa">
+    <input id="telempresa" placeholder="Telefone Empresa">
+    <input id="emailempresa" placeholder="Email Empresa">
+
+    <button onclick="gerar()">Gerar</button>
+    <button onclick="window.print()">Imprimir</button>
+</div>
+
+<div class="documento">
+
+    <div class="header">
+        <img src="sus.jpeg">
+        <img src="guaxupe.jpeg">
+        <img src="vigilancia.jpeg">
+    </div>
+
+    <div class="titulo">
+        ANEXO I – RESOLUÇÃO SES/MG Nº 10.601 DE 21 DE OUTUBRO DE 2025<br>
+        SOLICITAÇÃO DE LICENCIAMENTO SANITÁRIO
+    </div>
+
+    <p>Senhor(a) coordenador(a),</p>
+
+    <p>
+        Eu, <span class="linha" id="v_nome"></span>,
+        portador dos documentos abaixo:
+    </p>
+
+    <p>
+        RG: <span class="linha" id="v_rg"></span>,
+        Órgão: <span class="linha" id="v_orgao"></span>,
+        Data: <span class="linha" id="v_dataexp"></span>
+    </p>
+
+    <p>CPF: <span class="linha" id="v_cpf"></span></p>
+
+    <p>Endereço: <span class="linha-longa" id="v_endereco"></span></p>
+    <p>Município/UF: <span class="linha-longa" id="v_municipio"></span></p>
+    <p>Telefone: <span class="linha-longa" id="v_telefone"></span></p>
+    <p>E-mail: <span class="linha-longa" id="v_email"></span></p>
+
+    <p><strong>Responsável legal pelo estabelecimento:</strong></p>
+
+    <p>Razão Social: <span class="linha-longa" id="v_razao"></span></p>
+    <p>Nome Fantasia: <span class="linha-longa" id="v_fantasia"></span></p>
+    <p>Data início: <span class="linha" id="v_datafunc"></span></p>
+
+    <p>
+        CNPJ: <span class="linha" id="v_cnpj"></span>
+        I.E.: <span class="linha" id="v_ie"></span>
+        Inscrição Municipal: <span class="linha" id="v_im"></span>
+    </p>
+
+    <p>Endereço: <span class="linha-longa" id="v_endempresa"></span></p>
+    <p>Município/UF: <span class="linha-longa" id="v_munempresa"></span></p>
+    <p>Telefone: <span class="linha" id="v_telempresa"></span>
+       E-mail: <span class="linha" id="v_emailempresa"></span></p>
+
+    <p>
+        Natureza Jurídica:
+        ( ) Associação ( ) Cooperativa ( ) Filantrópico
+        ( ) Fundação ( ) Municipal ( ) Privado
+    </p>
+
+    <p>
+        Solicito ( ) Emissão ( ) Renovação do alvará sanitário.
+    </p>
+
+    <p id="data"></p>
+
+    <div class="assinatura">
+        _______________________________<br>
+        ASSINATURA DO RESPONSÁVEL
+    </div>
+
+</div>
+
+<script>
+function gerar() {
+    function set(id, value) {
+        document.getElementById(id).innerText = value;
+    }
+
+    set("v_nome", nome.value);
+    set("v_rg", rg.value);
+    set("v_orgao", orgao.value);
+    set("v_dataexp", dataexp.value);
+    set("v_cpf", cpf.value);
+    set("v_endereco", endereco.value);
+    set("v_municipio", municipio.value);
+    set("v_telefone", telefone.value);
+    set("v_email", email.value);
+
+    set("v_razao", razao.value);
+    set("v_fantasia", fantasia.value);
+    set("v_datafunc", datafunc.value);
+    set("v_cnpj", cnpj.value);
+    set("v_ie", ie.value);
+    set("v_im", im.value);
+    set("v_endempresa", endempresa.value);
+    set("v_munempresa", munempresa.value);
+    set("v_telempresa", telempresa.value);
+    set("v_emailempresa", emailempresa.value);
+
+    const hoje = new Date();
+    document.getElementById("data").innerText =
+        "Guaxupé, " + hoje.getDate() + " de " +
+        hoje.toLocaleString('pt-BR', { month: 'long' }) +
+        " de " + hoje.getFullYear();
+}
+</script>
+
+</body>
+</html>
